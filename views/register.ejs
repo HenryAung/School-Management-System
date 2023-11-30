@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="font-sans bg-gray-100">
+
+      <!-- Include the top menu -->
+      <%- include('navbar.ejs') %>
+
+<!-- registerForm.ejs -->
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
+    <h2 class=" grid place-items-center text-2xl font-bold mb-4">Register</h2>
+    <form action="/register" method="post">
+        
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+        <input type="text" id="username" name="username" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+        <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+        <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="passwordConfirm" class="block text-sm font-medium text-gray-600">Confirm Your Password</label>
+        <input type="password" id="passwordConfirm" name="passwordConfirm" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="grid place-items-center">
+        <button type="submit" class="bg-green-500 text-white p-2 rounded-md">Register</button>
+        <a class="" href="./login">
+          <p class="self-center text-md p-3 rounded-md font-semibold whitespace-nowrap text-blue-500 hover:bg-gray-100"> Already have an account? Log in here! </p>
+      </a>
+      </div>
+      
+    </form>
+  </div>
+  
+  <% if (message) { %>
+    <div class="bg-red-500 text-black p-4 rounded-md shadow-md">
+      <p class="font-semibold"><%= message %></p>
+    </div>
+  <% } %>
+
+</body>
+</html>
