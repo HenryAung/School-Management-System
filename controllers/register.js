@@ -1,6 +1,7 @@
 const db = require('../db'); 
 const jwt = require('jsonwebtoken'); 
 const bcrypt = require('bcryptjs'); 
+const { name } = require('ejs');
 
 exports.register_get = (req, res) => { 
     res.render('register', {
@@ -10,7 +11,7 @@ exports.register_get = (req, res) => {
   
 exports.register_post =   (req, res) => { 
     
-    const { username, email, password, passwordConfirm }  = req.body; 
+    const { email, password, passwordConfirm }  = req.body; 
 
     
     // Check if the email is already taken
@@ -25,12 +26,20 @@ exports.register_post =   (req, res) => {
         else if (password != passwordConfirm) {
           res.render('register', { message: 'passwords do not match' });
         } 
-        else { 
-            res.render('index')
-        }
+      
 
         let hashedPassword = await bcrypt.hash(password, 8); 
         console.log(hashedPassword); 
 
+        db.query('INSERT INTO student SET ?', {email : email, password : hashedPassword } , (error , result) => { 
+          if (error) { 
+            console.log(error)
+          } 
+          else { 
+            console.log(result); 
+            return res.render('register', {message : 'user registered'})
+          }
+        }
+        )
     })
   }
