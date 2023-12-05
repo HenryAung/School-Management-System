@@ -1,0 +1,30 @@
+<div class="">
+    <div class="relative inline-block text-left">
+        <button id="teacher-button" class="block ">
+            <span>Teachers</span>
+            </button>
+        <div id="teacher" class="hidden ">
+            <div class="py-2">
+                <a href="#" class="block px-4 py-2 text-white-400 hover:bg-gray-800 rounded-md">Add Teacher</a>
+                <a href="#" class="block px-4 py-2 text-white-400 hover:bg-gray-800 rounded-md">Teacher List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to toggle the teacher button visibility
+    const teacherButton = document.getElementById('teacher-button');
+    const teacher = document.getElementById('teacher');
+
+    teacherButton.addEventListener('click', () => {
+        teacher.classList.toggle('hidden');
+    });
+
+    // Close the teacher when clicking outside of it
+    document.addEventListener('click', (event) => {
+        if (!teacherButton.contains(event.target) && !teacher.contains(event.target)) {
+            teacher.classList.add('hidden');
+        }
+    });
+</script>

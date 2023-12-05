@@ -1,0 +1,30 @@
+<div class="">
+    <div class="relative inline-block text-left">
+        <button id="student-button" class="block">
+            <span>Students</span>
+            </button>
+        <div id="student" class="hidden ">
+            <div class="py-2">
+                <a href="#" class="block px-4 py-2 text-white-400 hover:bg-gray-800 rounded-md">Add Student</a>
+                <a href="#" class="block px-4 py-2 text-white-400 hover:bg-gray-800 rounded-md">Student List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to toggle the student button visibility
+    const studentButton = document.getElementById('student-button');
+    const student = document.getElementById('student');
+
+    studentButton.addEventListener('click', () => {
+        student.classList.toggle('hidden');
+    });
+
+    // Close the student when clicking outside of it
+    document.addEventListener('click', (event) => {
+        if (!studentButton.contains(event.target) && !student.contains(event.target)) {
+            student.classList.add('hidden');
+        }
+    });
+</script>
