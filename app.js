@@ -28,8 +28,12 @@ app.set('views', path.join(__dirname, './views'))
 
 
 // Include routes
+
+const studentRoute = require('./routes/student/student')
+
 app.use('/', require('./routes/pages'));
 app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'))
+app.use('/student', studentRoute); 
 
 app.listen(PORT, () => console.log('Example app is listening on port 3000.'));

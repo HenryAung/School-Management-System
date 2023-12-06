@@ -1,10 +1,10 @@
-const db = require('../db'); 
+const db = require('../../db'); 
 const jwt = require('jsonwebtoken'); 
 const bcrypt = require('bcryptjs'); 
 const { name } = require('ejs');
 
 exports.register_get = (req, res) => { 
-    res.render('register', {
+    res.render('auth/register', {
         message: ''
     })
   }
@@ -21,10 +21,10 @@ exports.register_post =   (req, res) => {
             throw error 
           } 
         else if (results.length > 0) {
-            res.render('register', { message: 'Email is already taken' });
+            res.render('/auth/register', { message: 'Email is already taken' });
           }
         else if (password != passwordConfirm) {
-          res.render('register', { message: 'passwords do not match' });
+          res.render('/auth/register', { message: 'passwords do not match' });
         } 
       
 
@@ -37,7 +37,7 @@ exports.register_post =   (req, res) => {
           } 
           else { 
             console.log(result); 
-            return res.render('register', {message : 'user registered'})
+            return res.render('/auth/register', {message : 'user registered'})
           }
         }
         )
