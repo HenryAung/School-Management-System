@@ -1,9 +1,9 @@
 const db = require('../db'); 
 
 
- function getTeachers() {
+ function getEmployee() {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM schoolmanagement.teachers', [], (error, result) => {
+    db.query('SELECT * FROM schoolmanagement.employee', [], (error, result) => {
       if (error) {
         reject(error);
       } else {

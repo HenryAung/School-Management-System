@@ -1,26 +1,11 @@
- <% students.forEach((student, index) => { %>
-                    <tr>
-                        <td class="border border-gray-300 py-2 px-4 text-center"><%= index + 1 %></td>
-                        <td class="border border-gray-300 py-2 px-4"><%= student.name %></td>
-                        <td class="border border-gray-300 py-2 px-4 text-center"><%= student.age %></td>
-                        <td class="border border-gray-300 py-2 px-4 text-center"><%= student.grade %></td>
-                    </tr>
-                <% }); %>
-
-
-                <a href="/edit/<%= student.id %>" class="text-blue-500 hover:underline mx-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M2 17l-1.355 2.033a2 2 0 00.777 2.776l1.006.38 3.53-3.53-.38-1.006a2 2 0 00-2.777-.777L2 17z"></path>
-                                </svg>
-                            </a>
-                            <a href="/delete/<%= student.id %>" class="text-red-500 hover:underline mx-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                            </a>
+exports.formValidation = [
+  check('email').isEmail().withMessage('Invalid email address').trim().escape().normalizeEmail(),
+  
+  check('password').isLength({ min: 8 })
+  .withMessage('Password Must Be at Least 8 Characters')
+  .matches('[0-9]').withMessage('Password Must Contain a Number')
+  .matches('[A-Z]').withMessage('Password Must Contain an Uppercase Letter').trim().escape(),
+  check('passwordConfirm')
+      .notEmpty().withMessage('Confirm password cannot be empty')
+      .equals(password),
+]

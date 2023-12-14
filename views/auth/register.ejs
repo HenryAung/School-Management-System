@@ -15,12 +15,31 @@
 <!-- registerForm.ejs -->
 <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
     <h2 class=" grid place-items-center text-2xl font-bold mb-4">Register</h2>
+
+    <% if (message) { %>
+      <div class="bg-red-300 text-black my-10 p-4 rounded-md shadow-md">
+        <p class="font-semibold"><%= message %></p>
+      </div>
+    <% } %>
+
+    <% if (errors) { %>
+      <div class="bg-red-300 text-black my-10 p-4 rounded-md shadow-md">
+     
+        <ul>
+          <% for (let i = 0; i < errors.length; i++) { %>
+            <li><%= errors[i]%></li>
+          <% } %>
+        </ul>
+      </div>
+    <% } %>
+  
+  
     <form action="/register" method="post">
         
 
       <div class="mb-4">
         <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-        <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
+        <input type="email" id="email" name="email" class="mt-1 p-3 w-full border rounded-md">
       </div>
 
       <div class="mb-4">
@@ -33,6 +52,17 @@
         <input type="password" id="passwordConfirm" name="passwordConfirm" class="mt-1 p-2 w-full border rounded-md">
       </div>
 
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="userRole">You are registering as :</label>
+        <select
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="userRole" name="userRole" type="text" required>
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+            <option value="employee">Employee</option>
+        </select>
+      </div>
+
       <div class="grid place-items-center">
         <button type="submit" class="bg-green-500 text-white p-2 rounded-md">Register</button>
         <a class="" href="./login">
@@ -43,11 +73,6 @@
     </form>
   </div>
   
-  <% if (message) { %>
-    <div class="bg-red-500 text-black p-4 rounded-md shadow-md">
-      <p class="font-semibold"><%= message %></p>
-    </div>
-  <% } %>
 
 </body>
 </html>
