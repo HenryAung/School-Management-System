@@ -27,9 +27,9 @@ exports.teacherlist_post = async (req, res) => {
       console.error('Error', err); 
     }
 }
-
+ 
   exports.add_teacher_get = (req, res) => { 
-    res.render('teachers/teacherform')
+    res.render('teachers/teacherform', {message: ''})
   }
   
 exports.add_teacher_post = async (req, res) => { 

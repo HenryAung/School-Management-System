@@ -38,12 +38,12 @@ exports.register_post =  async (req, res) => {
     }
 
     const errors = validationResult(req);
-    if (errors) {
-      console.log(errors)
-      res.render('auth/register', { message: 'passwords do not match', errors : {errors}})
-    }
-  
-    // hashing password with bcrypt 
+    if (errors.errors.length > 0) {
+      err = errors.errors
+      console.log(err)
+      res.render('auth/register', { message: '', errors : err })
+    } 
+    else { 
         let hashedPassword = await bcrypt.hash(password, 8); 
         console.log(hashedPassword); 
 
@@ -54,10 +54,15 @@ exports.register_post =  async (req, res) => {
           } 
           else { 
             console.log(result); 
-            return res.render('auth/register', {message : 'user registered', errors : ''})
+            return res.render('index' )
           }
         }
         )
+    }
+
+  
+    // hashing password with bcrypt 
+      
     }
 
     exports.formValidation = [
