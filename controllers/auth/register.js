@@ -46,9 +46,9 @@ exports.register_post =  async (req, res) => {
     }
 
     const errors = validationResult(req);
-    if (errors) {
+    if (errors.length > 0) {
       console.log(errors)
-      res.render('auth/register', { message: 'passwords do not match', errors : {errors}})
+      res.render('auth/register', { message: '', errors : {errors}})
     }
   
     // hashing password with bcrypt 
@@ -62,7 +62,7 @@ exports.register_post =  async (req, res) => {
           } 
           else { 
             console.log(result); 
-            return res.render('auth/register', {message : 'user registered', errors : ''})
+            return res.render('index', {message : '', errors : ''})
           }
         }
         )

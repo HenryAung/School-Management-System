@@ -26,7 +26,7 @@ exports.login_post = async (req, res) => {
         console.log(error)
       }
       if (result) { 
-        res.redirect('/' )
+        res.render('index' )
       }
       else { 
         res.render('auth/login', {message : 'wrong password. try again', user: userData })
