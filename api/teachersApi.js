@@ -1,47 +1,57 @@
-const teacherModel = require('../../model/teachermodel')
+const express = require('express');
+const router = express.Router();
+const db = require('../db');
 
-
-exports.teacherlist_get = async (req, res) => { 
-  
+// Get all teachers
+router.get('/', async (req, res) => {
     try {
-      const teachers = await teacherModel.getTeachers();
-      console.log(teachers);
-      res.render('teachers/teacherlist', {teachers : teachers})
+        const [teachers] = await db.query('SELECT * FROM schoolmanagement.Teachers');
+        console.log(teachers)
+        res.json(teachers);
     } catch (error) {
-      console.error('Error:', error);
+        console.error(error);
+        res.status(500).send('Server error');
     }
+});
 
-  }
-  
-exports.teacherlist_post = async (req, res) => { 
-    const firstname  = req.body.firstname;
-    const lastname = req.body.lastname; 
-    const email = req.body.email 
-    const values = [firstname, lastname, email];
+// Add a new teacher
+router.post('/', async (req, res) => {
+    try {
+        const { firstName, lastName, gender, email, dateOfBirth, address, phoneNumber } = req.body;
+
+        const values = [firstName, lastName, gender, email, dateOfBirth, address, phoneNumber];
     
-    try { 
-      const teachers = await teacherModel.findTeachers(values); 
-      console.log(teachers)
-      res.render('teachers/teacherlist', {teachers : teachers})
-    } catch (err) { 
-      console.error('Error', err); 
-    }
-}
- 
-  exports.add_teacher_get = (req, res) => { 
-    res.render('teachers/teacherform', {message: ''})
-  }
-  
-exports.add_teacher_post = async (req, res) => { 
-    const { firstName, lastName, gender, email, dateOfBirth, address, phoneNumber } = req.body;
+        const [result] = await db.query('INSERT INTO schoolmanagement.Teachers (teacher_fname, teacher_lname, gender, teacher_email, date_of_birth, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)', values);
 
-    const values = [firstName, lastName, gender, email, dateOfBirth, address, phoneNumber];
-
-    try { 
-      const teacher = await teacherModel.addTeacher(values); 
-      console.log(teacher)
-      res.render('teachers/teacherform', {message : 'New teacher has been added!!'})
-    } catch (err) { 
-      console.error('Error', err); 
+        res.status(201).json({ id: result.insertId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
     }
-}
+});
+
+// Update a teacher
+router.put('/:id', async (req, res) => {
+    try {
+        const { firstName, lastName, gender, email, dateOfBirth, address, phoneNumber } = req.body;
+
+        const [result] = await db.query('UPDATE teachers SET teacher_fname = ?, teacher_lname = ? gender = ?, teacher_email = ? tdate_of_birth = ?, address = ? phone_number = ? TeacherIDd = ?', [firstName, lastName, gender, email, dateOfBirth, address, phoneNumber, req.params.id]);
+        res.status(200).send('Teacher updated');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+// Delete a teacher
+router.delete('/:id', async (req, res) => {
+    try {
+        await db.query('DELETE FROM schoolmanagement.teachers WHERE TeacherID = ?', [req.params.id]);
+        res.status(200).send('Teacher deleted');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+module.exports = router;

@@ -6,7 +6,7 @@ exports.employeelist_get = async (req, res) => {
     try {
       const employee = await employeeModel.getEmployee();
       
-      res.render('employee/employeelist', {employee : employee})
+      res.status(200).json(employee)
     } catch (error) {
       console.error('Error:', error);
     }

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express(); 
+const bodyParser1 = require('body-parser');
 const path = require("path"); 
 
 const dotenv = require('dotenv'); 
@@ -19,6 +20,7 @@ app.use(express.static(publicDirectory));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(bodyParser1.json());
 
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
@@ -45,6 +47,9 @@ app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'))
 
 
+//API routes include 
+const teacherAPIRoute = require('./api/teachersApi');
+const bodyParser = require('body-parser');
 
 app.use('/student', studentRoute) 
 app.use('/teacher', teacherRoute) 
@@ -52,5 +57,7 @@ app.use('/employee', employeeRoute)
 app.use('/books', openLibraryRoute); 
 app.use('/about', aboutRoute); 
 app.use('/contact', contactRoute); 
+
+app.use('/api/teacher', teacherAPIRoute)
 
 app.listen(PORT, () => console.log('Example app is listening on port 3000.'));
