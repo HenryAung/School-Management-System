@@ -19,6 +19,14 @@ exports.register_post =  async (req, res) => {
     
     const { email, password, passwordConfirm, userRole }  = req.body; 
 
+    const result = validationResult(req);
+
+    if (result.length > 0) {
+      console.log(result)
+      res.render('auth/register', { message: '', errors : result.errors })
+    } 
+    else { 
+
     // Check if the email is already taken or pasword not match  
     try { 
       const user = await userModel.findByEmail(email);
@@ -38,26 +46,28 @@ exports.register_post =  async (req, res) => {
     }
 
     const errors = validationResult(req);
-    if (errors.errors.length > 0) {
-      err = errors.errors
-      console.log(err)
-      res.render('auth/register', { message: '', errors : err })
-    } 
-    else { 
+    if (errors) {
+      console.log(errors)
+      res.render('auth/register', { message: 'passwords do not match', errors : {errors}})
+    }
+  
+    // hashing password with bcrypt 
         let hashedPassword = await bcrypt.hash(password, 8); 
         console.log(hashedPassword); 
 
-    // inserting user into database 
+        // inserting user into database 
         db.query('INSERT INTO users SET ?', {username : email, user_password : hashedPassword, user_role : userRole } , (error , result) => { 
           if (error) { 
             console.log(error)
           } 
           else { 
             console.log(result); 
-            return res.render('index' )
+            return res.render('auth/register', {message : 'user registered', errors : ''})
           }
         }
         )
+    }
+  
     }
 
   

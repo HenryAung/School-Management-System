@@ -10,11 +10,18 @@
 <body class="font-sans bg-gray-100">
 
       <!-- Include the top menu -->
-      <%- include('../componants/navbar.ejs') %>
+      <%- include('../componants/navbar.ejs', {user : ""}) %>
 
 
           <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
             <h2 class="text-2xl font-bold mb-4">Login</h2>
+
+            <% if (message) { %>
+              <div class="bg-red-300 text-black my-10 p-4 rounded-md shadow-md">
+                <p class="font-semibold"><%= message %></p>
+              </div>
+            <% } %>
+
             <form action="/login" method="post">
               <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-600">Email</label>

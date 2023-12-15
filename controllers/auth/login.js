@@ -1,8 +1,10 @@
 const bcrypt = require('bcryptjs'); 
 const userModel = require('../../model/usermodel')
+const checkAuth = require('../auth/checkAuth')
+const jwt = require('jsonwebtoken')
 
 exports.login_get = (req, res) => { 
-    res.render('auth/login', {message : ""})
+    res.render('auth/login', {message : "", user: ""})
   }
   
 exports.login_post = async (req, res) => { 
@@ -15,6 +17,7 @@ exports.login_post = async (req, res) => {
     if (user.length < 1) { 
       res.render('auth/login', { 
         message: 'Mail not found, user does not exist' ,
+        user: user
         } 
         )
     }
@@ -23,10 +26,10 @@ exports.login_post = async (req, res) => {
         console.log(error)
       }
       if (result) { 
-        res.render('index' )
+        res.redirect('/' )
       }
       else { 
-        res.render('auth/login', {message : 'wrong password. try again'})
+        res.render('auth/login', {message : 'wrong password. try again', user: userData })
       }
     }
     
