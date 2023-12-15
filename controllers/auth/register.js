@@ -73,8 +73,7 @@ exports.register_post =  async (req, res) => {
   
     // hashing password with bcrypt 
       
-    }
-
+  
     exports.formValidation = [
       check('email').isEmail().withMessage('Invalid email address').trim().escape().normalizeEmail(),
 

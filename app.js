@@ -36,8 +36,11 @@ const studentRoute = require('./routes/student/student')
 const teacherRoute = require('./routes/teacher/teacher')
 const employeeRoute = require('./routes/employee/employee')
 const openLibraryRoute = require('./routes/openLibrary')
+const aboutRoute = require('./routes/about')
+const contactRoute = require('./routes/contact')
 
-app.use('/', require('./routes/pages'));
+app.use('/', require('./routes/register'));
+app.use('/home', require('./routes/pages')) 
 app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'))
 
