@@ -9,9 +9,6 @@
 
 <body class="font-sans bg-gray-100">
 
-      <!-- Include the top menu -->
-      <%- include('../componants/navbar.ejs') %>
-
 <!-- registerForm.ejs -->
 <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
     <h2 class=" grid place-items-center text-2xl font-bold mb-4">Register</h2>
@@ -27,7 +24,7 @@
      
         <ul>
           <% for (let i = 0; i < errors.length; i++) { %>
-            <li><%= errors[i]%></li>
+            <li><%= errors[i].msg%></li>
           <% } %>
         </ul>
       </div>
