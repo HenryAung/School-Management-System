@@ -3,8 +3,10 @@ const db = require('../../db')
 
 exports.editStudent = async (req, res) => {
     try {
-        const student = await studentModel.getStudentByID([req.params.id])
-        // console.log(student); 
+        const id = req.params.id
+        console.log(id)
+        const student = await studentModel.getStudentByID(req.params.id)
+        console.log(student); 
         if (student.length > 0) {
             res.render('students/editstudent', { message: "", student: student[0] });
         } else {
