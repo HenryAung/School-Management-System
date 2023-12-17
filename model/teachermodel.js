@@ -15,7 +15,7 @@ const db = require('../db');
 
 function getTeacherByID(teacherID) { 
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM schoolmanagement.teachers WHERE TeacherID= ?', [teacherID], (error, result) => {
+    db.query('SELECT * FROM schoolmanagement.Teachers WHERE TeacherID= ?', [teacherID], (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -42,7 +42,7 @@ function findTeachers(values) {
 
 function addTeacher(values ) { 
   return new Promise ((resolve, reject) => { 
-      const sql = 'INSERT INTO Teachers (teacher_fname, teacher_lname, gender, teacher_email, date_of_birth, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      const sql = 'INSERT INTO schoolmanagement.Teachers (teacher_fname, teacher_lname, gender, teacher_email, date_of_birth, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)';
      
       db.query(sql, values , (error, result) => {
           if (error) {

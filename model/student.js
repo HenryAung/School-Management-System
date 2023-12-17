@@ -15,7 +15,7 @@ const db = require('../db');
 
 function getStudentByID(studentID) { 
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM schoolmanagement.students WHERE StudentID= ?', [studentID], (error, result) => {
+    db.query('SELECT * FROM schoolmanagement.Students WHERE StudentID= ?', [studentID], (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -28,7 +28,7 @@ function getStudentByID(studentID) {
 function findStudents(values) { 
     return new Promise ((resolve, reject) => { 
         
-        const sql = "SELECT * FROM schoolmanagement.students WHERE firstname =? OR lastname = ? OR student_email = ?";
+        const sql = "SELECT * FROM schoolmanagement.Students WHERE firstname =? OR lastname = ? OR student_email = ?";
         
         db.query(sql, values , (error, result) => {
             if (error) {
@@ -42,7 +42,7 @@ function findStudents(values) {
 
 function addStudent(values ) { 
     return new Promise ((resolve, reject) => { 
-        const sql = 'INSERT INTO students (firstname, lastname, gender, student_email, date_of_birth, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO schoolmanagement.Students (firstname, lastname, gender, student_email, date_of_birth, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)';
        
         db.query(sql, values , (error, result) => {
             if (error) {
@@ -55,10 +55,10 @@ function addStudent(values ) {
 }
 
 
+
 module.exports = {
   getAllStudents,
   findStudents,
   addStudent,
   getStudentByID,
-
 };
