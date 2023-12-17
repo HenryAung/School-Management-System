@@ -42,9 +42,6 @@ const aboutRoute = require('./routes/about')
 const contactRoute = require('./routes/contact')
 //API routes include 
 const apiStudentRoutes = require('./api/studentsApi');
-const apiTeacherRoutes = require('./api/teachersApi');
-const apiEmployeeRoutes = require('./api/employeeApi');
-
 
 
 
@@ -61,8 +58,7 @@ app.use('/about', aboutRoute);
 app.use('/contact', contactRoute); 
 
 app.use('/api/students', apiStudentRoutes);
-app.use('/api/teachers', apiTeacherRoutes);
-app.use('/api/employees', apiEmployeeRoutes);
+
 
 
 app.listen(PORT, () => console.log('Example app is listening on port 3000.'));
