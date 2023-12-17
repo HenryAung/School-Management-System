@@ -40,17 +40,19 @@ const employeeRoute = require('./routes/employee/employee')
 const openLibraryRoute = require('./routes/openLibrary')
 const aboutRoute = require('./routes/about')
 const contactRoute = require('./routes/contact')
+//API routes include 
+const apiStudentRoutes = require('./api/studentsApi');
+const apiTeacherRoutes = require('./api/teachersApi');
+const apiEmployeeRoutes = require('./api/employeeApi');
+
+
+
+
 
 app.use('/', require('./routes/register'));
 app.use('/home', require('./routes/pages')) 
 app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'))
-
-
-//API routes include 
-const teacherAPIRoute = require('./api/teachersApi');
-const bodyParser = require('body-parser');
-
 app.use('/student', studentRoute) 
 app.use('/teacher', teacherRoute) 
 app.use('/employee', employeeRoute) 
@@ -58,6 +60,9 @@ app.use('/books', openLibraryRoute);
 app.use('/about', aboutRoute); 
 app.use('/contact', contactRoute); 
 
-app.use('/api/teacher', teacherAPIRoute)
+app.use('/api/students', apiStudentRoutes);
+app.use('/api/teachers', apiTeacherRoutes);
+app.use('/api/employees', apiEmployeeRoutes);
+
 
 app.listen(PORT, () => console.log('Example app is listening on port 3000.'));

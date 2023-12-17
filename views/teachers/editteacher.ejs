@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Edit</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+    <!-- Include the top menu -->
+    <%- include('../componants/navbar') %>
+
+             
+
+<body class="font-sans bg-gray-100">
+
+  <div class="flex">
+      
+      <!-- Include the side menu -->
+      <%- include('../componants/sidemenu') %>
+
+      <!-- form for adding new teacher -->
+      <div class="container mx-auto my-10 px-10 py-10">
+        
+          <h1 class="text-xl font-bold mb-4">Edit Teacher</h1>
+
+          <% if (message) { %>
+            <div class="bg-green-300 text-black my-10 p-4 rounded-md shadow-md">
+              <p class="font-semibold"><%= message %></p>
+            </div>
+          <% } %> 
+
+          <form action="/teacher/update/<%= teacher.TeacherID %>" method="post" class="grid grid-cols-2 my-10 gap-4">
+              <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">First Name</label>
+                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstname" type="text" name="firstname" value="<%= teacher.teacher_fname %>">
+              </div>
+              
+              <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">Last Name</label>
+                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" name="lastname" value="<%= teacher.teacher_lname %>">
+              </div>
+  
+           
+              <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="teacher_email">Email</label>
+                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="teacher_email" type="email" name="teacher_email" value="<%= teacher.teacher_email %>">
+              </div>
+  
+              <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Gender</label>
+                <select class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gender" name="gender">
+                    <option value="Male" <%= teacher.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                    <option value="Female" <%= teacher.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                    <option value="Other" <%= teacher.gender === 'Other' ? 'selected' : '' %>>Other</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="date_of_birth">Date of Birth</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_of_birth" type="date" name="date_of_birth" value="<%= teacher.date_of_birth %>">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="address">Address</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" name="address" value="<%= teacher.address %>">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="phone_number">Phone Number</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone_number" type="tel" name="phone_number" value="<%= teacher.phone_number %>">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Update</button>
+            </div>
+
+          </form>
+      </div>
+  </div>
+</body>
+</html>

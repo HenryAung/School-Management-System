@@ -49,8 +49,8 @@
                         <tr>
                             <th class="border border-gray-300 py-2 px-4 bg-gray-100">No.</th>
                             <th class="border border-gray-300 py-2 px-4 bg-gray-100">Name</th>
-                            <th class="border border-gray-300 py-2 px-4 bg-gray-100">Age</th>
-                            <th class="border border-gray-300 py-2 px-4 bg-gray-100">Class</th>
+                            <th class="border border-gray-300 py-2 px-4 bg-gray-100">Gender</th>
+                            <th class="border border-gray-300 py-2 px-4 bg-gray-100">Address</th>
                             <th class="border border-gray-300 py-2 px-4 bg-gray-100">Action</th>
                         </tr>
                     </thead>
@@ -59,7 +59,7 @@
                         <% employee.forEach((emp) => { %>
                             <% var name = emp.emp_firstname + ' ' + emp.emp_lastname; %>
                             <tr>
-                                <td class="border border-gray-300 py-2 px-4 text-center"><%= emp.empID  %></td>
+                                <td class="border border-gray-300 py-2 px-4 text-center"><%= emp.emp_id  %></td>
                                 <td class="border border-gray-300 py-2 px-4"><%= name %></td>
                                 <td class="border border-gray-300 py-2 px-4 text-center"><%= emp.gender %></td>
                                 <td class="border border-gray-300 py-2 px-4 text-center"><%= emp.address %></td>

@@ -1,7 +1,7 @@
 const db = require('../db'); 
 
 
- function getTeachers() {
+ function getAllTeachers() {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM schoolmanagement.Teachers', [], (error, result) => {
       if (error) {
@@ -13,6 +13,17 @@ const db = require('../db');
   });
 }
 
+function getTeacherByID(teacherID) { 
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM schoolmanagement.teachers WHERE TeacherID= ?', [teacherID], (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
 
 function findTeachers(values) { 
   return new Promise ((resolve, reject) => { 
@@ -45,7 +56,8 @@ function addTeacher(values ) {
 
 
 module.exports = {
-  getTeachers,
+  getAllTeachers,
+  getTeacherByID,
   findTeachers,
-  addTeacher
+  addTeacher,
 };

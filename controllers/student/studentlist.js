@@ -4,8 +4,8 @@ const studentModel = require('../../model/student')
 exports.studentlist_get = async (req, res) => {
 
     try {
-      const students = await studentModel.getStudents();
-      res.render('students/studentlist', {students : students})
+      const students = await studentModel.getAllStudents();
+      res.render('students/studentlist', {students : students, message : ""})
     } catch (error) {
       console.error('Error:', error);
     }
@@ -21,7 +21,7 @@ exports.studentlist_post = async (req, res) => {
   try { 
     const students = await studentModel.findStudents(values); 
     console.log(students)
-    res.render('students/studentlist', {students : students})
+    res.render('students/studentlist', {students : students , message : ''})
   } catch (err) { 
     console.error('Error', err); 
   }

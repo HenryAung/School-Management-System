@@ -20,10 +20,17 @@
 
         
 
+
         <!-- Main Content -->
         <main class="flex-1 p-4">
             <div class="container mx-auto my-10">
                 <h1 class="text-3xl font-bold mb-6">Student Lists</h1>
+
+                <% if (message) { %>
+                    <div class="bg-green-300 text-black my-10 p-4 rounded-md shadow-md">
+                      <p class="font-semibold"><%= message %></p>
+                    </div>
+                  <% } %> 
 
             <!-- Search bar -->
             <div class="mb-4">
@@ -62,16 +69,16 @@
                                     <td class="border border-gray-300 py-2 px-4 text-center"><%= student.StudentID  %></td>
                                     <td class="border border-gray-300 py-2 px-4"><%= name %></td>
                                     <td class="border border-gray-300 py-2 px-4 text-center"><%= student.gender %></td>
-                                    <td class="border border-gray-300 py-2 px-4 text-center"><%= student.address %></td>
+                                    <td class="border border-gray-300 py-2 px-4 text-center"><%= student.student_email %></td>
                                     <td class="border border-gray-300 py-2 px-4 text-center flex space-x-4"> 
                                         <!-- Edit Button -->
                                         <button class="bg-blue-500 text-white px-4 py-2 rounded-md">
-                                            Edit
+                                            <a href="/student/edit/<%= student.StudentID %>">Edit</a>
                                         </button>
                                     
                                         <!-- Delete Button -->
                                         <button class="bg-red-500 text-white px-4 py-2 rounded-md">
-                                            Delete
+                                            <a href="/student/delete/<%= student.StudentID %>">Delete</a>
                                         </button>
                                     </td>
                                 </tr>

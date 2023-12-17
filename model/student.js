@@ -1,9 +1,21 @@
 const db = require('../db'); 
 
 
- function getStudents() {
+ function getAllStudents() {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM schoolmanagement.Students', [], (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+function getStudentByID(studentID) { 
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM schoolmanagement.students WHERE StudentID= ?', [studentID], (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -16,7 +28,7 @@ const db = require('../db');
 function findStudents(values) { 
     return new Promise ((resolve, reject) => { 
         
-        const sql = "SELECT * FROM schoolmanagement.students WHERE firstname =? OR lastname = ? OR email = ?";
+        const sql = "SELECT * FROM schoolmanagement.students WHERE firstname =? OR lastname = ? OR student_email = ?";
         
         db.query(sql, values , (error, result) => {
             if (error) {
@@ -42,8 +54,11 @@ function addStudent(values ) {
         })
 }
 
+
 module.exports = {
-  getStudents,
+  getAllStudents,
   findStudents,
   addStudent,
+  getStudentByID,
+
 };
